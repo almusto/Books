@@ -12,6 +12,7 @@ class BookDataStore {
 
   static let sharedInstance = BookDataStore()
   var books = [Book]()
+  var book: Book!
 
 
   func getBooks(completion: @escaping () -> ()) {
@@ -32,6 +33,19 @@ class BookDataStore {
 
   func addNewBook(withInfo dict: [String:String], completion: @escaping () -> ()) {
     BooksAPI.addBook(withInfo: dict) { 
+      completion()
+    }
+  }
+
+  func getBook(withID id: Int, completion: @escaping () -> ()) {
+    BooksAPI.getBook(withID: id) { (bookDict) in
+      self.book = Book(dict: bookDict)
+      completion()
+    }
+  }
+
+  func deleteBook(withID id: Int, completion: @escaping () -> ()) {
+    BooksAPI.deleteBook(withID: id) { 
       completion()
     }
   }

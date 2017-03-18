@@ -24,7 +24,6 @@ class BookTextField: UITextField {
   }
 
   func commonInit() {
-    self.textColor = UIColor.lightGray
     self.layer.borderWidth = 2
     self.layer.cornerRadius = 8
     self.layer.borderColor = UIColor.black.cgColor

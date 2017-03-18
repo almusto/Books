@@ -15,23 +15,17 @@ class BookCell: UITableViewCell {
   var book: Book! {
     didSet {
       self.titleLabel.text = book.title
-
     }
   }
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     commonInit()
-
-
-
   }
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-
     commonInit()
-
   }
 
 

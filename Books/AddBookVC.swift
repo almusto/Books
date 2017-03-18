@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddBookVC: UIViewController, UITextFieldDelegate {
+class AddBookVC: UIViewController {
 
 
   let store = BookDataStore.sharedInstance
@@ -35,26 +35,7 @@ class AddBookVC: UIViewController, UITextFieldDelegate {
       submitButton.addTarget(self, action: #selector(onSubmit(_:)), for: .touchUpInside)
       view.addSubview(submitButton)
 
-
-
-
-      let frame = CGRect()
-
-      titleTextField = BookTextField(frame: frame)
-      titleTextField.text = "Book Title"
-      authorTextField = BookTextField(frame: frame)
-      authorTextField.text = "Author"
-      publisherTextField = BookTextField(frame: frame)
-      publisherTextField.text = "Publisher"
-
-      let textFields = [titleTextField, authorTextField, publisherTextField]
-
-      for textField in textFields {
-        textField?.delegate = self
-        textField?.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(textField!)
-      }
-
+      setUpTextFeilds()
       addConstraints()
 
 
@@ -86,18 +67,68 @@ class AddBookVC: UIViewController, UITextFieldDelegate {
 
 
   func onSubmit(_ sender: UIButton) {
-    if (titleTextField.text != nil && titleTextField.text != "Book Title") && (authorTextField.text != nil && authorTextField.text != "Author") && (publisherTextField.text != nil && publisherTextField.text != "Publisher") {
+    let areTextFieldsValid: Bool = (titleTextField.text != nil && titleTextField.text != "Book Title") && (authorTextField.text != nil && authorTextField.text != "Author") && (publisherTextField.text != nil && publisherTextField.text != "Publisher")
+
+    if areTextFieldsValid {
       guard let titleText = titleTextField.text, let authorText = authorTextField.text, let publisherText = publisherTextField.text else { return}
-      let dict = ["title": titleText,
-                  "author" : authorText,
-                  "publisher" : publisherText,
-                  "url" : ""]
-      store.addNewBook(withInfo: dict, completion: {
+      let successAlertVC = UIAlertController(title: "Book has been added", message: "", preferredStyle: .alert)
+      let okAction = UIAlertAction(title: "ok", style: .default, handler: { (action) in
+        let dict = ["title": titleText,
+                    "author" : authorText,
+                    "publisher" : publisherText,
+                    "url" : ""]
+        self.store.addNewBook(withInfo: dict, completion: {
+
+        })
+        self.titleTextField.text = "Book Title"
+        self.titleTextField.textColor = UIColor.lightGray
+        self.authorTextField.text = "Author"
+        self.authorTextField.textColor = UIColor.lightGray
+        self.publisherTextField.text = "Publisher"
+        self.publisherTextField.textColor = UIColor.lightGray
+        self.dismiss(animated: true, completion: nil)
 
       })
-    }
 
+      successAlertVC.addAction(okAction)
+      self.present(successAlertVC, animated: true, completion: nil)
+    } else {
+      let failureAlertVC = UIAlertController(title: "invalid entries", message: "fix your shit", preferredStyle: .alert)
+      let failureAction = UIAlertAction(title: "ok", style: .default) { (action) in
+        self.dismiss(animated: true, completion: nil)
+    }
+      failureAlertVC.addAction(failureAction)
+      self.present(failureAlertVC, animated: true, completion: nil)
+    }
   }
+}
+
+//MARK: TextFieldDelegate
+
+extension AddBookVC: UITextFieldDelegate {
+
+
+  func setUpTextFeilds() {
+
+    let frame = CGRect()
+
+    titleTextField = BookTextField(frame: frame)
+    titleTextField.text = "Book Title"
+    authorTextField = BookTextField(frame: frame)
+    authorTextField.text = "Author"
+    publisherTextField = BookTextField(frame: frame)
+    publisherTextField.text = "Publisher"
+
+    let textFields = [titleTextField, authorTextField, publisherTextField]
+
+    for textField in textFields {
+      textField?.textColor = UIColor.lightGray
+      textField?.delegate = self
+      textField?.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(textField!)
+    }
+  }
+
 
   func textFieldDidBeginEditing(_ textField: UITextField) {
     if textField.textColor == UIColor.lightGray {
@@ -127,6 +158,4 @@ class AddBookVC: UIViewController, UITextFieldDelegate {
     textField.resignFirstResponder()
     return true
   }
-
-
 }

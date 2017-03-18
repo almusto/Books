@@ -66,10 +66,36 @@ class BooksAPI {
       })
       task.resume()
     }
+  }
 
+  class func getBook(withID id: Int, completion: @escaping ([String:Any]) -> ()) {
+    let urlString = "https://flatironchallenge.herokuapp.com/books/\(id)"
+    Alamofire.request(urlString).responseJSON { response in
+      DispatchQueue.main.async {
+        if let JSON = response.result.value as? [String:Any] {
+          completion(JSON)
+        }
+      }
+    }
+  }
 
-
-
-
+  class func deleteBook(withID id: Int, completion: @escaping () -> ()) {
+    let urlString = "https://flatironchallenge.herokuapp.com/books/\(id)"
+    let url = URL(string: urlString)
+    let session = URLSession.shared
+    if let unwrappedURL = url {
+      var request = URLRequest(url: unwrappedURL)
+      request.httpMethod = "DELETE"
+      let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+        if let status = response as? HTTPURLResponse {
+          if status.statusCode == 200 {
+            completion()
+          } else {
+            print(error!)
+          }
+        }
+      })
+      task.resume()
+    }
   }
 }

@@ -18,8 +18,6 @@ class BookTableVC: UITableViewController {
 
       tableView.register(BookCell.self, forCellReuseIdentifier: "bookCell")
       navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAdd(_:)))
-      
-
 
     }
 
@@ -55,9 +53,19 @@ class BookTableVC: UITableViewController {
         return cell
     }
 
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        let book = books[indexPath.row]
+        books.remove(at: indexPath.row)
+        store.deleteBook(withID: book.id, completion: { })
+        tableView.deleteRows(at: [indexPath], with: .fade)
+      } else if editingStyle == .insert {
+      }
+    }
+
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let destVC = BookDetailVC()
-    destVC.book = books[indexPath.row]
+    destVC.bookId = books[indexPath.row].id
     navigationController?.pushViewController(destVC, animated: true)
   }
 
@@ -66,22 +74,5 @@ class BookTableVC: UITableViewController {
     navigationController?.pushViewController(destVC, animated: true)
 
   }
-
-
-
-
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
 
 }
