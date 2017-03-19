@@ -29,9 +29,10 @@ class BookTableVC: UITableViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     store.getBooks {
-        self.books = self.store.books
-        self.tableView.reloadData()
+      self.books = self.store.books
+      self.tableView.reloadData()
     }
+
   }
 
     // MARK: - Table view data source

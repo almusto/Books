@@ -147,10 +147,9 @@ class BookDetailVC: UIViewController {
     let alertVC = UIAlertController(title: "Would you like to checkout this book?", message: "", preferredStyle: .alert)
 
     let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
-      self.store.checkoutBook(withID: self.book.id, atTime: dateString) {
-        self.checkedByLabel.text = "Sandro on \(dateString)"
-        self.checkOutButton.isEnabled = false
-      }
+      self.store.checkoutBook(withID: self.book.id, atTime: dateString) {}
+      self.navigationController!.popViewController(animated: true)
+
     }
     alertVC.addAction(yesAction)
 
