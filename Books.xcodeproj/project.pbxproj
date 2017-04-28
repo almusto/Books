@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53E5E940E861D049646E1DEA /* Pods_Books.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2A0D7999F80BD86681BFF6F /* Pods_Books.framework */; };
+		AA6806131EB2D51E00C8D425 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6806121EB2D51E00C8D425 /* BookView.swift */; };
 		AAF2E8501E78655F00D07F7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2E84F1E78655F00D07F7B /* AppDelegate.swift */; };
 		AAF2E8571E78655F00D07F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAF2E8561E78655F00D07F7B /* Assets.xcassets */; };
 		AAF2E85A1E78655F00D07F7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAF2E8581E78655F00D07F7B /* LaunchScreen.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		0E291FC9378695BC131F7661 /* Pods-Books.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books.release.xcconfig"; path = "Pods/Target Support Files/Pods-Books/Pods-Books.release.xcconfig"; sourceTree = "<group>"; };
 		4FF48A584358F098A64AB06A /* Pods-Books.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Books/Pods-Books.debug.xcconfig"; sourceTree = "<group>"; };
+		AA6806121EB2D51E00C8D425 /* BookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		AAF2E84C1E78655F00D07F7B /* Books.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Books.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF2E84F1E78655F00D07F7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAF2E8561E78655F00D07F7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		AAF2E8661E78688300D07F7B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AA6806121EB2D51E00C8D425 /* BookView.swift */,
 				AAF2E8631E7866C900D07F7B /* BookCell.swift */,
 			);
 			name = View;
@@ -262,6 +265,7 @@
 				AAF2E8501E78655F00D07F7B /* AppDelegate.swift in Sources */,
 				AAF2E8691E7868D400D07F7B /* BooksAPI.swift in Sources */,
 				AAF2E8831E797B8200D07F7B /* AddBookVC.swift in Sources */,
+				AA6806131EB2D51E00C8D425 /* BookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
